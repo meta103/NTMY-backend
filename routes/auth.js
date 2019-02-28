@@ -23,17 +23,17 @@ router.post('/login', (req, res, next) => {
     });
   }
 
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
+  if (!email || !password) {
     return res.status(422).json({
       error: 'validation'
     });
   }
 
   User.findOne({
-      username
-    })
+    email
+  })
     .then((user) => {
       if (!user) {
         return res.status(404).json({
@@ -53,23 +53,24 @@ router.post('/login', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   const {
-    username,
+    name,
+    email,
     password
   } = req.body;
 
-  if (!username || !password) {
+  if (!email || !password) {
     return res.status(422).json({
       error: 'empty'
     });
   }
 
   User.findOne({
-      username
-    }, 'username')
+    email
+  }, 'email')
     .then((userExists) => {
       if (userExists) {
         return res.status(422).json({
-          error: 'username-not-unique'
+          error: 'email-not-unique'
         });
       }
 
@@ -77,7 +78,8 @@ router.post('/signup', (req, res, next) => {
       const hashPass = bcrypt.hashSync(password, salt);
 
       const newUser = User({
-        username,
+        name,
+        email,
         password: hashPass,
       });
 

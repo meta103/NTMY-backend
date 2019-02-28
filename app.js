@@ -11,6 +11,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 const auth = require('./routes/auth');
+//const tasks = require('./routes/tasks');
+const edit = require('./routes/edit-profile');
+const contacts = require('./routes/contacts');
 
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
@@ -29,6 +32,7 @@ app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN]
 }));
+//Codigo a usar en caso de que el cors no funcione:
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 //   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS,DELETE');
@@ -57,6 +61,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
+//app.use('/tasks', tasks);
+app.use('/edit', edit);
+app.use('/contacts', contacts);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
