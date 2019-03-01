@@ -11,7 +11,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const auth = require('./routes/auth');
-//const tasks = require('./routes/tasks');
+const tasks = require('./routes/tasks');
 const edit = require('./routes/edit-profile');
 const contacts = require('./routes/contacts');
 
@@ -61,7 +61,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
-//app.use('/tasks', tasks);
+app.use('/tasks', tasks);
 app.use('/edit', edit);
 app.use('/contacts', contacts);
 

@@ -16,6 +16,10 @@ const userSchema = new Schema({
     type: ObjectId,
     ref: "User"
   }],
+  tasks: [{
+    type: ObjectId,
+    ref: "Task"
+  }],
 }, {
     timestamps: {
       createdAt: 'created_at',
