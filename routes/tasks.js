@@ -51,6 +51,31 @@ router.get('/details/:id', (req, res, next) => {
     .catch(next)
 
 })
+router.put('/details/:id', (req, res, next) => {
+  const taskId = req.params.id
+
+  Task.findByIdAndUpdate({ _id: taskId }, { status: "done" }, { new: true })
+    .then((task) => {
+      console.log(task)
+      res.status(200);
+      res.json(task);
+    })
+    .catch(next)
+
+})
+
+router.put('/opp', (req, res, next) => {
+  const { id, status } = req.body;
+
+  Task.findByIdAndUpdate({ _id: id }, { status }, { new: true })
+    .then((task) => {
+      console.log(task)
+      res.status(200);
+      res.json(task);
+    })
+    .catch(next)
+
+})
 
 
 module.exports = router;

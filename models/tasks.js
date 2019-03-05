@@ -11,6 +11,7 @@ const taskSchema = new Schema({
   toName: String,
   date: { type: Date, default: Date.now },
   notes: String,
+  status: { type: String, default: 'pending', enum: ['pending', 'done', 'won', 'lost'] },
 }, {
     timestamps: {
       createdAt: 'created_at',
