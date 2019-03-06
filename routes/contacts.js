@@ -27,8 +27,9 @@ router.put('/add', (req, res, next) => {
   console.log(contactsArray)
   console.log(userId)
 
-  User.findByIdAndUpdate(userId, { contacts: contactsArray })
+  User.findByIdAndUpdate(userId, { contacts: contactsArray }, { new: true })
     .then((user) => {
+      req.session.currentUser = user;
       res.status(200);
       res.json(user);
     })
