@@ -24,15 +24,12 @@ router.post('/new', (req, res, next) => {
 
 router.get('/list', (req, res, next) => {
   const userId = req.session.currentUser._id;
-  console.log(userId);
 
   Task.find({ owner: userId })
 
     .then((tasks) => {
-      console.log(tasks)
       res.status(200);
       res.json(tasks);
-      //console.log(phone)
     })
     .catch(next)
 
@@ -43,10 +40,8 @@ router.get('/details/:id', (req, res, next) => {
 
   Task.find({ _id: taskId })
     .then((tasks) => {
-      console.log(tasks)
       res.status(200);
       res.json(tasks);
-      //console.log(phone)
     })
     .catch(next)
 
@@ -56,7 +51,6 @@ router.put('/details/:id', (req, res, next) => {
 
   Task.findByIdAndUpdate({ _id: taskId }, { status: "done" }, { new: true })
     .then((task) => {
-      console.log(task)
       res.status(200);
       res.json(task);
     })
@@ -69,7 +63,6 @@ router.put('/opp', (req, res, next) => {
 
   Task.findByIdAndUpdate({ _id: id }, { status }, { new: true })
     .then((task) => {
-      console.log(task)
       res.status(200);
       res.json(task);
     })

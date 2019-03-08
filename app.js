@@ -19,8 +19,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE
-}).then(() => {
-  console.log(`Connected to database`);
 }).catch((error) => {
   console.error(error);
 })
